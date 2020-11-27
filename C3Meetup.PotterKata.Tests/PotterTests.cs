@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace C3Meetup.PotterKata.Tests
@@ -15,10 +16,15 @@ namespace C3Meetup.PotterKata.Tests
             Assert.Equal(0, price);
         }
 
-        [Fact]
-        public void GivenOneBooks_WhenIPurchase_ItShouldCost8()
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
+        [InlineData(5)]
+        public void GivenAnyOneBook_WhenIPurchase_ItShouldCost8(int bookNumber)
         {
-            var price = calculator.Price(new List<int>(){1});
+            var price = calculator.Price(new List<int>{bookNumber});
             Assert.Equal(8, price);
         }
     }
