@@ -8,7 +8,7 @@ namespace C3Meetup.PotterKata
 
         public double Price(List<int> books)
         {
-            return 0;
+            return books.Count * 8;
         }
     }
 }
