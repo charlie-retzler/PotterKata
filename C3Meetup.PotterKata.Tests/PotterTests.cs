@@ -110,5 +110,22 @@ namespace C3Meetup.PotterKata.Tests
             });
             Assert.Equal( 3 * 40 * 0.75 + 2 * 32 * 0.80, price);
         }
+
+        [Fact]
+        public void GiveMultipleSetsOfThreeFoursAndFives_WhenIPurchase_ShouldGroupMultipleThreesAndFivesIntoFoursForLowestPrice()
+        {
+            var price = _calculator.Price(new List<int>
+            {
+                1, 1, 1, 1, 1, 1, 1,
+                2, 2, 2, 2,
+                3, 3, 3, 3,
+                4, 4,
+                5, 5
+            });
+
+            // 4 sets of 4, 3 sets of 1
+            var actual = 4 * (4 * 8 * .8) + 3 * (1 * 8);
+            Assert.Equal(actual, price);
+        }
     }
 }
