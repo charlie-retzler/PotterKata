@@ -33,5 +33,12 @@ namespace C3Meetup.PotterKata.Tests
             var price = _calculator.Price(new List<int> { 1, 1, 1 });
             Assert.Equal(24, price);
         }
+
+        [Fact]
+        public void GivenTwoDifferentBooks_WhenIPurchase_ItShouldBeDiscountedTo95percent()
+        {
+            var price = _calculator.Price(new List<int> {1, 2});
+            Assert.Equal(16 * 0.95, price);
+        }
     }
 }
