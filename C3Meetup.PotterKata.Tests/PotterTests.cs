@@ -63,10 +63,17 @@ namespace C3Meetup.PotterKata.Tests
         }
 
         [Fact]
-        public void GivenTwoOfTheSameBookAndOneDifferentBook_WhenIPurchase_TwoBooksShouldBeDiscountedTo90percentAndOneNotDiscounted()
+        public void GivenTwoOfTheSameBookAndOneDifferentBook_WhenIPurchase_TwoBooksShouldBeDiscountedTo95percentAndOneNotDiscounted()
         {
             var price = _calculator.Price(new List<int> { 1, 1, 2 });
             Assert.Equal(16 * 0.95 + 8, price);
+        }
+
+        [Fact]
+        public void GivenTwoOfTheSameBookAndTwoOfAnother_WhenIPurchase_TwoBooksShouldBeDiscountedTo95percentForBothGroups()
+        {
+            var price = _calculator.Price(new List<int> { 1, 1, 2, 2 });
+            Assert.Equal(32 * 0.95, price);
         }
     }
 }
