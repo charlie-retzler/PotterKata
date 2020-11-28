@@ -1,15 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
 
 namespace C3Meetup.PotterKata
 {
     public class Calculator
     {
+        private readonly Dictionary<int, double> _discounts = new Dictionary<int, double>
+        {
+            {1, 1.0},
+            {2, .95},
+            {3, .90}, 
+            {4, .80},
+            {5, .75}
+        };
+
+        private readonly int _retailPrice = 8;
 
         public double Price(List<int> books)
         {
-            //var groups = books.GroupBy(x => x).ToList();
             var groups = books
                 .GroupBy(x => x)
                 .Select(grp => new
@@ -22,34 +30,11 @@ namespace C3Meetup.PotterKata
 
             while (groups.Count > 0)
             {
-                if (groups.Count == 1)
-                {
-                    total += groups.Count * 8 * 1.0;
-                }
-
-                if (groups.Count == 2)
-                {
-                    total += groups.Count * 8 * 0.95;
-                }
-
-                if (groups.Count == 3)
-                {
-                    total += groups.Count * 8 * 0.90;
-                }
-
-                if (groups.Count == 4)
-                {
-                    total += groups.Count * 8 * 0.80;
-                }
-
-                if (groups.Count == 5)
-                {
-                    total += groups.Count * 8 * 0.75;
-                }
+                total += groups.Count * _retailPrice * _discounts[groups.Count];
 
                 groups = groups
                     .Where(x => x.Count > 1)
-                    .Select(x => new { BookNumber = x.BookNumber, Count = x.Count - 1 })
+                    .Select(x => new {x.BookNumber, Count = x.Count - 1 })
                     .ToList();
             }
 
