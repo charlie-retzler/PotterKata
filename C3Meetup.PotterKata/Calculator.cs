@@ -42,7 +42,14 @@ namespace C3Meetup.PotterKata
 
                 if (groups.Count == 5 && tempGroups.Count == 3)
                 {
-                    // Price as two groups of 4, since it's cheaper
+                    // Price as two groups of 4, since it's cheaper for the current discounts. See Math(s)
+                    // (Group of 5 + Group of 3) > (Two Groups of 4)
+                    // (5 * 8 * .75) + (3 * 8 * .90) > (2 * 4 * 8 * .80) 
+                    // => (5 * .75) + (3 * .90) > (2 * 4 * .80)
+                    // => (5 * .75) + (3 * .90) > (8 * .80)
+                    // => 3.75 + 2.7 > 6.4
+                    // => 6.45 > 6.4
+
                     groupCost = 2 * 4 * _retailPrice * _discounts[4];
 
                     tempGroups = groups

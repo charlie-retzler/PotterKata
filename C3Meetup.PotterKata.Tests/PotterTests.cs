@@ -91,10 +91,24 @@ namespace C3Meetup.PotterKata.Tests
         }
 
         [Fact]
-        public void GivenGroupThatCouldBeFiveAndThreeOrFourAndFour_WhenIPurchase_ShouldHaveTheLowestPrice()
+        public void GivenGroupThatCouldBeFiveAndThree_Or_FourAndFour_WhenIPurchase_ShouldHaveTheLowestPrice()
         {
             var price = _calculator.Price(new List<int> { 1, 1, 2, 2, 3, 3, 4, 5 });
             Assert.Equal(2 * 32 * 0.80, price);
+        }
+
+        [Fact]
+        public void GivenGroupThatCouldBeFourGroupsOfFiveAndOneThree_Or_ThreeGroupsOfFiveAndTwoGroupsOfFour_WhenIPurchase_ShouldHaveTheLowestPrice()
+        {
+            var price = _calculator.Price(new List<int>
+            {
+                1, 1, 1, 1, 1, 
+                2, 2, 2, 2, 2, 
+                3, 3, 3, 3, 
+                4, 4, 4, 4, 4, 
+                5, 5, 5, 5
+            });
+            Assert.Equal( 3 * 40 * 0.75 + 2 * 32 * 0.80, price);
         }
     }
 }
