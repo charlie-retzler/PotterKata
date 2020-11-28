@@ -89,5 +89,12 @@ namespace C3Meetup.PotterKata.Tests
             var price = _calculator.Price(new List<int> { 1, 2, 2, 3, 4, 5 });
             Assert.Equal(40 * 0.75 + 8, price);
         }
+
+        [Fact]
+        public void GivenGroupThatCouldBeFiveAndThreeOrFourAndFour_WhenIPurchase_ShouldHaveTheLowestPrice()
+        {
+            var price = _calculator.Price(new List<int>{1, 1, 2, 2, 3, 3, 4, 5});
+            Assert.Equal(2 * 32 * 0.80, price);
+        }
     }
 }
