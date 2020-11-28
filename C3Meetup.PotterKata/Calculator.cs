@@ -23,23 +23,36 @@ namespace C3Meetup.PotterKata
                 .Select(grp => new GroupedBooks(grp.Key, grp.Count()))
                 .ToList();
 
-            var total = 0.0;
+            var optimizedTotal = CalculateOptimizedPrice(groups);
 
-            total = CalculateGreedyPrice(groups, total);
-
-            return total;
+            return optimizedTotal;
         }
 
-        private double CalculateGreedyPrice(List<GroupedBooks> groups, double total)
+        private double CalculateOptimizedPrice(List<GroupedBooks> groups)
         {
+            var total = 0.0;
             while (groups.Count > 0)
             {
-                total += groups.Count * _retailPrice * _discounts[groups.Count];
+                var groupCost =  groups.Count * _retailPrice * _discounts[groups.Count];
 
-                groups = groups
+                var tempGroups = groups
                     .Where(x => x.Count > 1)
                     .Select(x => new GroupedBooks(x.BookNumber, x.Count - 1))
                     .ToList();
+
+                if (groups.Count == 5 && tempGroups.Count == 3)
+                {
+                    // Price as two groups of 4, since it's cheaper
+                    groupCost = 2 * 4 * _retailPrice * _discounts[4];
+
+                    tempGroups = groups
+                        .Where(x => x.Count > 2)
+                        .Select(x => new GroupedBooks(x.BookNumber, x.Count - 2))
+                        .ToList();
+                }
+
+                groups = tempGroups;
+                total += groupCost;
             }
 
             return total;
