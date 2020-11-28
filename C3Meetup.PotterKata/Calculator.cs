@@ -15,6 +15,16 @@ namespace C3Meetup.PotterKata
                 return groups.Count() * 8 * 0.95;
             }
 
+            if (groups.Count() == 3)
+            {
+                return groups.Count() * 8 * 0.90;
+            }
+
+            if (groups.Count() == 4)
+            {
+                return groups.Count() * 8 * 0.80;
+            }
+
 
             return books.Count * 8;
         }
